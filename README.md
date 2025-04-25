@@ -20,7 +20,7 @@ An Android application that displays job listings fetched from a remote API with
 
 ---
 
-## Vido
+## Video
 
 > 📷 Drive Link: https://drive.google.com/file/d/1lJGSBOsqHyCcVFxzbtP68EsRe1BP6cJY/view?usp=sharing
 
