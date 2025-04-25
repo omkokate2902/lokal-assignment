@@ -1,5 +1,7 @@
 package com.example.lokalassignment.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,11 +52,11 @@ public class JobDetailsActivity extends AppCompatActivity {
         // Set data
         title.setText(job.title);
         company.setText("🏢 Company: " + safe(job.company_name));
-        place.setText("📍 Location: " + safe(job.place));
-        salary.setText("💰 Salary: " + safe(job.salary));
-        jobType.setText("🧰 Job Type: " + safe(job.job_type));
-        experience.setText("📆 Experience: " + safe(job.experience));
-        qualification.setText("🎓 Qualification: " + safe(job.qualification));
+        place.setText("📍 Location: " + safe(job.primary_details != null ? job.primary_details.place : null));
+        salary.setText("💰 Salary: " + safe(job.primary_details != null ? job.primary_details.salary : null));
+        jobType.setText("🧰 Job Type: " + safe(job.primary_details != null ? job.primary_details.job_type : null));
+        experience.setText("📅 Experience: " + safe(job.primary_details != null ? job.primary_details.experience : null));
+        qualification.setText("🎓 Qualification: " + safe(job.primary_details != null ? job.primary_details.qualification : null));
         category.setText("📂 Category: " + safe(job.job_category));
         role.setText("👤 Role: " + safe(job.job_role));
         openings.setText("📢 Openings: " + job.openings_count);
@@ -79,6 +81,28 @@ public class JobDetailsActivity extends AppCompatActivity {
                 Toast.makeText(this, "Added to bookmarks", Toast.LENGTH_SHORT).show();
             }
             updateBookmarkIcon();
+        });
+
+        // Handle phone click
+        phone.setOnClickListener(v -> {
+            String number = job.custom_link != null ? job.custom_link.replace("tel:", "") : null;
+            if (number != null && !number.isEmpty()) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + number));
+                startActivity(intent);
+            }
+        });
+
+        // Handle WhatsApp click
+        whatsapp.setOnClickListener(v -> {
+            if (job.whatsapp_no != null && !job.whatsapp_no.isEmpty()) {
+                String message = "Hi, I am interested to apply on the job opening for " +
+                        safe(job.title) + " that you posted on the Lokal app";
+                String url = "https://wa.me/91" + job.whatsapp_no + "?text=" + Uri.encode(message);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
+            }
         });
     }
 

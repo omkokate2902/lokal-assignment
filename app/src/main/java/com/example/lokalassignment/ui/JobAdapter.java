@@ -48,14 +48,17 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull JobViewHolder holder, int position) {
         JobItem job = jobList.get(position);
-        holder.title.setText(job.title);
 
-        String displayPlace = job.place != null ? job.place : "Not Available";
-        String displaySalary = job.salary != null ? job.salary : "Not Available";
+        String title = job.title != null ? job.title : "Not Available";
+        String displayPlace = (job.primary_details != null && job.primary_details.place != null) ?
+                job.primary_details.place : "Not Available";  // Access primary_details.place
+        String displaySalary = (job.primary_details != null && job.primary_details.salary != null) ?
+                job.primary_details.salary : "Not Available";
         String displayPhone = job.custom_link != null ? job.custom_link.replace("tel:", "") : "Not Available";
 
-        holder.place.setText("📍 " + displayPlace);
-        holder.salary.setText("💰 " + displaySalary);
+        holder.title.setText(title);
+        holder.place.setText(displayPlace);  // Use primary_details.place here
+        holder.salary.setText(displaySalary);
         holder.phone.setText("📞 " + displayPhone);
 
         // Update bookmark icon based on the current state
@@ -76,6 +79,14 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
             }
         });
 
+        if (job.is_premium) {
+            holder.premiumTag.setVisibility(View.VISIBLE);
+        } else {
+            holder.premiumTag.setVisibility(View.GONE);
+        }
+
+        holder.views.setText(String.valueOf(job.views));
+
         // Click to open job details
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), JobDetailsActivity.class);
@@ -90,7 +101,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
     }
 
     static class JobViewHolder extends RecyclerView.ViewHolder {
-        TextView title, place, salary, phone;
+        TextView title, place, salary, phone, premiumTag, views;
         ImageView bookmarkIcon;
 
         public JobViewHolder(@NonNull View itemView) {
@@ -99,6 +110,8 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
             place = itemView.findViewById(R.id.job_place);
             salary = itemView.findViewById(R.id.job_salary);
             phone = itemView.findViewById(R.id.job_phone);
+            premiumTag = itemView.findViewById(R.id.premium_tag);
+            views = itemView.findViewById(R.id.views);
             bookmarkIcon = itemView.findViewById(R.id.bookmark_icon);
         }
     }

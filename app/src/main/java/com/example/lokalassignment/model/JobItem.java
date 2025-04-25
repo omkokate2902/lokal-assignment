@@ -1,6 +1,6 @@
 package com.example.lokalassignment.model;
 
-// JobItem.java
+import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class JobItem implements Serializable {
@@ -8,17 +8,11 @@ public class JobItem implements Serializable {
     public String title;
     public int type;
 
-    // Flattened primary_details
-    public String place;
-    public String salary;
-    public String job_type;
-    public String experience;
-    public String fees_charged;
-    public String qualification;
+    @SerializedName("primary_details")
+    public PrimaryDetails primary_details;
 
     public int salary_max;
     public int salary_min;
-
     public String content;
     public String company_name;
     public String button_text;
