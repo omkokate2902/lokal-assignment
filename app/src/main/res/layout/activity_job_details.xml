@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="?android:attr/dividerHorizontal"
+        android:showDividers="middle"
+        android:dividerPadding="8dp">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/details_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:paddingBottom="12dp" />
+
+        <ImageView
+            android:id="@+id/details_bookmark"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/bookmarks"
+            android:contentDescription="Bookmark Icon"
+            android:padding="4dp"
+            android:layout_marginStart="8dp" />
+
+        <!-- Dynamic content below -->
+        <TextView
+            android:id="@+id/details_company"
+            style="@style/JobDetailText" />
+
+        <TextView
+            android:id="@+id/details_place"
+            style="@style/JobDetailText" />
+
+        <TextView
+            android:id="@+id/details_salary"
+            style="@style/JobDetailText" />
+
+        <TextView
+            android:id="@+id/details_job_type"
+            style="@style/JobDetailText" />
+
+        <TextView
+            android:id="@+id/details_experience"
+            style="@style/JobDetailText" />
+
+        <TextView
+            android:id="@+id/details_qualification"
+            style="@style/JobDetailText" />
+
+        <TextView
+            android:id="@+id/details_job_category"
+            style="@style/JobDetailText" />
+
+        <TextView
+            android:id="@+id/details_job_role"
+            style="@style/JobDetailText" />
+
+        <TextView
+            android:id="@+id/details_openings"
+            style="@style/JobDetailText" />
+
+        <TextView
+            android:id="@+id/details_views"
+            style="@style/JobDetailText" />
+
+        <TextView
+            android:id="@+id/details_applications"
+            style="@style/JobDetailText" />
+
+        <TextView
+            android:id="@+id/details_premium"
+            style="@style/JobDetailText" />
+
+        <TextView
+            android:id="@+id/details_phone"
+            style="@style/JobDetailText" />
+
+        <TextView
+            android:id="@+id/details_whatsapp"
+            style="@style/JobDetailText" />
+
+        <TextView
+            android:id="@+id/details_other_details"
+            style="@style/JobDetailText"
+            android:paddingTop="16dp" />
+    </LinearLayout>
+</ScrollView>
